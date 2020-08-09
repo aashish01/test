@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}History Orders{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'CSS/order.css'%}">
+{% endblock %}
+<!------------------- Body --------------------->
+{% block content %}
+<div class="order">
+    <div class="text">
+    <h1>Your's Orders List</h1>
+</div>
+    {% for i in order_history %}
+    <div>
+        <div class="order-header">
+            <strong class="float-left">Order ID: {{i.order_id}}</strong>
+            <strong class="float-middle">Ordered Date: {{i.date}}</strong>
+            <strong class="float-right">
+                {% if i.status %}
+                <button class="Success"><i class="fa fa-check"></i> Success</button>
+                {% else %}
+                <button class="fail">&times; Pending</button>
+                {% endif %}
+            </strong>
+        </div>
+        <div class="order-body">
+            <table>
+                {% for j in i.products %}
+                <tr>
+                    <td>
+                        <img src="/media/{{j.product_img1}}" style="height:80px;width:200px;">
+                    </td>
+                    <td>{{j.product_name}}</td>
+                    <td>NRP. {{j.final_price}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

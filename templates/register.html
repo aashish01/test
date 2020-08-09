@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}LogIn{% endblock %}
+<!-- CSS -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/login.css'%}">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+{% endblock %}
+<!-- Body part-->
+{% block content %}
+<div class="Forms">
+    <div class="content">
+        <div class="text">
+            Registration Form</div>
+        <form action="register" method='POST'>
+            {% csrf_token %}
+            <div class="field">
+                <input type="text" name="username" placeholder="Username" required>
+                <span class="fas fa-user"></span>
+            </div><br>
+            <div class="field">
+                <input type="text" name="first_name" placeholder="First Name" required>
+                <span class="fas fa-user"></span>
+            </div><br>
+            <div class="field">
+                <input type="text" name="last_name" placeholder="Last Name" required>
+                <span class="fas fa-user"></span>
+            </div><br>
+            <div class="field">
+                <input type="password" name="password1" placeholder="Password" required>
+                <span class="fas fa-lock"></span>
+            </div><br>
+            <div class="field">
+                <input type="password" name="password2" placeholder="Conform Password" required>
+                <span class="fas fa-lock"></span>
+            </div><br>
+            <div class="field">
+                <input type="email" name="email" placeholder="Email" required>
+                <span class="fa fa-envelope-open"></span>
+            </div>
+            <div class="forgot-pass">
+                <p>By creating an account you agree to our Terms & Privacy.</p></div>
+            <button type="submit">Registration</button>
+            <div class="sign-up">
+                Already member?
+                <a href="login">Login now</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

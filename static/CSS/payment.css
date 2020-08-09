@@ -1,0 +1,31 @@
+.box{
+    margin-left: 15em;
+    margin-right: 15em;
+    margin-top: 2em;
+    background-color: whitesmoke;
+}
+.box .text h1{
+    padding-top: .5em;
+    padding-bottom: .5em;
+    text-align: center;
+    color: green;
+    font-family: 'Times New Roman', Times, serif;
+}
+.box img{
+    margin-bottom: .5em;
+    padding-left: .5em;
+    padding-right: .5em;
+}
+.box button{
+    margin-bottom: 1em;
+    font-weight: bolder;
+    margin-left: 48em;
+    color: green;
+}
+.box .un h1{
+    padding-top: .5em;
+    padding-bottom: .5em;
+    text-align: center;
+    color:red;
+    font-family: 'Times New Roman', Times, serif;
+}

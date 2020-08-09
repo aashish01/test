@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Payment{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'CSS/cart.css'%}">
+{% endblock %}
+<!------------------- Body --------------------->
+{% block content %}
+<div class="box">
+    <h1>Click In Buy Now to continue </h1>
+    {{form.render}}
+</div>
+{% endblock %}

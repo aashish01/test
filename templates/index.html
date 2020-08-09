@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+<!------------------------------ CSS ----------------------------------------------->
+{% block css %}
+<link rel="stylesheet" href="{% static 'CSS/index.css'%}">
+<link rel="stylesheet" href="{% static 'CSS/imageslide.css'%}">
+<!-- Problem in mobile-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--end Problem in mobile-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+<!------------------------------ Body --------------------------------------------->
+{% block content %}
+<!--------- Image Slider ---------->
+<section class="home">
+    <div class="slider">
+        {% for i in slider%}
+        <div class="slide active" style="background-image: url('/media/{{i.slider_img}}')">
+            <div class="container">
+                <div class="caption">
+                   <!--- <h1>{{i.text1}}</h1>
+                    <p>{{i.text2}}</p>
+                    <a href="">Shop Now</a>-->
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+
+    <!-- controls  -->
+    <div class="controls">
+        <div class="prev"> < </div>
+        <div class="next"> > </div>
+        </div>
+
+        <!-- indicators -->
+        <div class="indicator">
+        </div>
+
+</section>
+<!--------- Menu Bar  ---------->
+<div class="topnav">
+    <a style="font-weight: bold; color: red;">Category: </a>
+    <a class="active" href="#">ALL</a>
+    <a href="#">cat1</a>
+    <a href="#">Cat2</a>
+    <div class="search-container">
+        <form action="/action_page.php">
+            <input type="text" placeholder="Search Products....." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
+<!--------- Product List  ---------->
+<div class="container">
+    <div class="row">
+        {% for i in products%}
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        <img class="pic-1" src="/media/{{i.product_img1}}">
+                        <img class="pic-2" src="/media/{{i.product_img2}}">
+                    </a>
+                    <span class="product-discount-label">{{i.availabily}}</span>
+                    <ul class="social">
+                        <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                    </ul>
+                </div>
+                <div class="product-content">
+                    <h3 class="title">{{i.product_name}}</h3>
+                    <div class="price">NRP. {{i.final_price}} </div>
+                    <form action="carts" method="POST">{% csrf_token %}
+                        <input type="hidden" value="{{i.id}}" name="pid">
+                        <input type="hidden" value="1" name="qty">
+                        <button type="submit" class="btn btn-success btn-block">
+                            <i class="fa fa-shopping-cart">
+                                Add To cart
+                            </i>
+                        </button>
+                    </form>
+                </div><br>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+<!------------------------------ JS ---------------------------------------------->
+{% block js %}
+<script src="{% static 'js/imageslide.js'%}"></script>
+{% endblock %}
+<!------------------------------ END jS -------------------------------------------->
+{% endblock %}

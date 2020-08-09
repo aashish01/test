@@ -1,0 +1,61 @@
+.order{
+    background-color: whitesmoke;
+    margin-right: 1em;
+    margin-left: 1em;
+    margin-top: 1em;
+    padding-bottom: 1em;
+}
+.text{
+    padding-top: 1em;
+    border-bottom: 1px solid black;
+}
+.text h1{
+    text-align: center;
+    color:blue;
+    border: 1px;
+}
+.order-header{
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.float-left{
+    font-weight: bold;
+}
+.float-middle{
+    padding-left: 22em;
+    font-weight: bold;
+    padding-right: 12em;
+}
+.order-body{
+    margin-left: 3em;
+    margin-right: 3em;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+td, th {
+    border: 3px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+  
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.Success{
+    border: 0px;
+    font-weight: bolder;
+    color: blue;
+
+}
+.fail{
+    border: 0px;
+    font-weight: bolder;
+    color: red;
+}

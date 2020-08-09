@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock %}
+<!------------------------------ CSS ----------------------------------------------->
+{% block css %}
+<link rel="stylesheet" href="{% static 'CSS/cart.css'%}">
+{% endblock %}
+<!------------------------------ Body----------------------------------------------->
+{% block content %}
+{% if status %}
+<h1>{{status}}</h1>
+{% endif %}
+<div class='col-md-9 my-5' style="box-shadow:0px 0px 10px gray;">
+    {% if msg %}
+    <div class="{{cls}} mt-5">{{msg}}</div>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <div class="row">
+        <div class="right">
+            <table>
+                <tr>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+                {% for i in items %}
+                <tr id="row{{i.id}}">
+                    <td><img src="/media/{{i.products.product_img1}}" style="height:80px; width: auto"> </td>
+                    <td>{{i.products.product_name}}</td>
+                    <td id="pp{{i.id}}">{{i.products.final_price}}</td>
+                    <td>
+                        <i class="fa fa-plus" style="width: 8%;" onclick="change_quan('{{i.id}}','plus')"></i>
+                        <input type="number" value="{{i.quantity}}" id="cart{{i.id}}" style="width: 15%;">
+                        <i class="fa fa-minus" style="width: 8%;" onclick="change_quan('{{i.id}}','minus')"></i>
+                    </td>
+                    <td><button onclick="remove_cart('{{i.id}}')"> Delete</button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="left">
+            <table>
+                {% if items|length == 0 %}
+                <p style="text-align: center; font-weight: bolder; color:red;"> Products are not added to carts</p>
+                {% else %}
+                <tr>
+                    <td><b style="text-align: center; font-weight: bolder; color: red;">Details</b></td>
+                    <td style="text-align: center; font-weight: bolder; color: red;">Price & Quantity</td>
+                </tr>
+                <tr>
+                    <td><b>Item Total</b></td>
+                    <td id="item_total"></td>
+                </tr>
+                <tr>
+                    <td><b>Quantity</b></td>
+                    <td id="quantity"></td>
+                </tr>
+                <tr>
+                    <td><b>Delivery</b></td>
+                    <td> Free</td>
+                </tr>
+                <tr style="border-top:2px sloid dotted">
+                    <td><b>Grand Total</b></td>
+                    <td id='grand_total'></td>
+                </tr>
+            </table><br>
+            <a class="cartbtn" href="{% url 'process_payment' %}">Click To Checkout</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+<script>
+    function grandTotal() {
+        $.ajax({
+            url: "{% url 'get_cart_data' %}",
+            type: 'get',
+            success: function (data) {
+                $('#item_total').html('Rs. ' + data.total)
+                $('#quantity').html(data.quan)
+                $('#grand_total').html('Rs. ' + data.total)
+            }
+        })
+    }
+    grandTotal();
+    function change_quan(id, action) {
+        let old = $('#cart' + id).val();
+        quan = 0
+        if (action == "plus") {
+            quan += parseInt(old) + 1
+        }
+        else {
+            quan += parseInt(old) - 1
+        }
+        $('#cart' + id).val(quan);
+
+        $.ajax({
+            url: "{% url 'change_quan' %}",
+            type: "get",
+            data: { cid: id, quantity: quan },
+            success: function (data) {
+                grandTotal();
+                if (data == 0) {
+                    remove_cart(id);
+                }
+            }
+        }
+
+        )
+    }
+    function remove_cart(id) {
+        $.ajax({
+            url: "{% url 'change_quan' %}",
+            data: { delete_cart: id },
+            success: function (data) {
+                grandTotal();
+                $('#row' + id).hide();
+            }
+        })
+    }
+</script>
+{% endblock %}

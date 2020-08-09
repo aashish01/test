@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!------------------------------------- CSS & JS ------------------------------------------------->
+    <link rel="stylesheet" href="{% static 'CSS/base.css' %}">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    <!--Header -->
+    <nav>
+        <ul>
+            <li class="logo">CompanyLogo</li><br>
+            <li class="items"><a href="/">Home</a></li>
+            <li class="btn"><a><i class="fas fa-bars"></i></a></li>
+            <!--------------- If Else Loop --------------->
+            {% if request.user.is_authenticated %}
+            <li class="items"><a href="carts">Carts</a></li>
+            <li class="items"><a href="order_history">{{user.username}}</a></li>
+            <li class="items"><a href="logout">Logout</a></li>
+            {% else %}
+            <!--------------- End Loop --------------->
+            <li class="items"><a href="login">LogIn</a></li>
+            <li class="items"><a href="register">Registration</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <!------------------------------------- Body ------------------------------------------------->
+    {% block content %}
+    {% endblock %}
+    <!------------------------------------- Footer ------------------------------------------------->
+
+    <!------------------------------------- Header Nav Bar js ------------------------------------------>
+    <script>
+        $(document).ready(function () {
+            $('.btn').click(function () {
+                $('.items').toggleClass("show");
+                $('ul li').toggleClass("hide");
+            });
+        });
+    </script>
+{% block js %}{% endblock %}
+</body>
+
+</html>

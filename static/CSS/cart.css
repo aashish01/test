@@ -1,0 +1,58 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+.row{
+  display: flex;
+}
+
+th, td {
+  text-align: center;
+  padding: 10px;
+}
+
+th:first-child, td:first-child {
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+.right{
+  width: 75%;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-top: 1em;
+  margin-bottom: 2em;
+}
+.left{
+  width: 23%;
+  padding-top: 1em;
+  margin-right: 1em;
+}
+.cartbtn{
+  margin-bottom: 2em;
+  margin-left: 8em;
+  font-weight: bold;
+  font-size: 1em;
+  text-decoration: none;
+  background-color:whitesmoke;
+  
+}
+.box{
+  background-color:whitesmoke;
+  margin-top: 2em;
+  margin-left: 8em;
+  margin-right: 8em;
+  margin-bottom: 3em;
+  text-align: center;
+  align-items: center;
+}
+
+.box h1{
+  padding-top: 1em;
+  padding-bottom: 3em;
+  color: red;
+}
